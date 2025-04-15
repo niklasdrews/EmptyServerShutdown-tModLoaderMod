@@ -3,7 +3,7 @@ Configs: {
 		DisplayName: Empty Server Shutdown Config
 
 		CheckPlayerCountIntervall: {
-			Label: Intervall in seconds to check if player reconnected.
+			Label: Intervall in seconds to check if player reconnected
 			Tooltip: Set the interval to check if a player reconnected. A to high value may cause the server to shutdown even if a player connected.
 		}
 
@@ -11,5 +11,17 @@ Configs: {
 			Label: Seconds Until Shutdown
 			Tooltip: Set the time to wait until the server shutdowns.
 		}
+
+		LoggingLevel: {
+			Label: Logging level
+			Tooltip: Defines which messages to output in console and ingame chat. 0 = No messages, 1 = informational messages, 2 = debug messages
+		}
+	}
+
+	CustomLogLevel: {
+		Tooltip: ""
+		None.Label: None
+		Info.Label: Info
+		Debug.Label: Debug
 	}
 }

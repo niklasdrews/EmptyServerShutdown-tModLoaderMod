@@ -22,4 +22,25 @@ public class EmptyServerShutdownConfig : ModConfig
     /// when it is empty.
     /// </summary>
     public int SecondsUntilShutdown;
+
+    [DefaultValue(CustomLogLevel.None)]
+    public CustomLogLevel LoggingLevel;
+
+    public enum CustomLogLevel
+    {
+        /// <summary>
+        /// No logging.
+        /// </summary>
+        None = 0,
+
+        /// <summary>
+        /// Log only info.
+        /// </summary>
+        Info = 1,
+
+        /// <summary>
+        /// Log debug messages and info.
+        /// </summary>
+        Debug = 2,
+    }
 }

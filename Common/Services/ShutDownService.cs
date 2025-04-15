@@ -7,6 +7,7 @@ using Terraria.Chat;
 using Terraria.IO;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using static EmptyServerShutdown.Common.Configs.EmptyServerShutdownConfig;
 
 namespace EmptyServerShutdown.Common
 {
@@ -37,7 +38,7 @@ namespace EmptyServerShutdown.Common
             if (Main.dedServ)
             {
                 shutDownScheduled = true;
-                BroadcastServer("Server is empty. Scheduling shut down.");
+                BroadcastServer("Server is empty. Scheduling shut down.", CustomLogLevel.Info);
 
                 // Start shutdown timer on a background task
                 Task.Run(async () =>
@@ -51,7 +52,7 @@ namespace EmptyServerShutdown.Common
                         await Task.Delay(Config.CheckPlayerCountIntervall * 1000);
                         waitedSeconds += Config.CheckPlayerCountIntervall;
 
-                        BroadcastServer($"Waited {waitedSeconds} seconds.");
+                        BroadcastServer($"Waited {waitedSeconds} seconds.", CustomLogLevel.Debug);
 
                         // when the shutdown time is reached, save and shut down
                         if (waitedSeconds >= Config.SecondsUntilShutdown)
@@ -70,9 +71,7 @@ namespace EmptyServerShutdown.Common
 
         public static void CancelShutdown()
         {
-            BroadcastServer(
-                $"Player (re)connected. Canceling shutdown. {ActivePlayerCount()} players online."
-            );
+            BroadcastServer($"Player (re)connected. Canceling shutdown.", CustomLogLevel.Info);
             shutDownScheduled = false;
         }
 
@@ -109,9 +108,9 @@ namespace EmptyServerShutdown.Common
         /// </remarks>
         private static void SaveAndShutdown()
         {
-            BroadcastServer("Saving world...");
+            BroadcastServer("Saving world...", CustomLogLevel.Info);
             WorldFile.SaveWorld(true);
-            BroadcastServer("World saved. Shutting down.");
+            BroadcastServer("World saved. Shutting down.", CustomLogLevel.Info);
 
             Main.autoShutdown = true;
 
@@ -119,7 +118,7 @@ namespace EmptyServerShutdown.Common
             Task.Run(async () =>
             {
                 await Task.Delay(3000); // Give it a moment to process shutdown
-                BroadcastServer("Server did not shut down. Forcing exit.");
+                BroadcastServer("Server did not shut down. Forcing exit.", CustomLogLevel.Debug);
                 Environment.Exit(0); // Force exit if nothing happens
             });
         }
@@ -128,11 +127,17 @@ namespace EmptyServerShutdown.Common
         /// Broadcasts a message to all players on the server and logs it to the console.
         /// </summary>
         /// <param name="message">The message to broadcast. It will be prefixed with "[EmptyServerShutdown]".</param>
-        public static void BroadcastServer(string message)
+        public static void BroadcastServer(
+            string message,
+            CustomLogLevel logLevel = CustomLogLevel.None
+        )
         {
-            message = $"[EmptyServerShutdown] {message}";
-            ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral(message), Color.Orange);
-            Console.WriteLine(message);
+            if (Config.LoggingLevel >= logLevel)
+            {
+                message = $"[EmptyServerShutdown] {message}";
+                ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral(message), Color.Orange);
+                Console.WriteLine(message);
+            }
         }
     }
 }

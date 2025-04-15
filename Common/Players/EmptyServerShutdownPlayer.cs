@@ -1,15 +1,14 @@
 using System;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Microsoft.Xna.Framework;
-using Terraria;
 using Terraria.Chat;
-using Terraria.IO;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using static EmptyServerShutdown.Common.Configs.EmptyServerShutdownConfig;
 
 namespace EmptyServerShutdown.Common.Players;
 
-public class EmptyServerShutdownPlayer : ModPlayer
+public class EmptyServerShutdownPlayerService : ModPlayer
 {
     public override void PlayerDisconnect()
     {
@@ -22,14 +21,10 @@ public class EmptyServerShutdownPlayer : ModPlayer
 
     public override void PlayerConnect()
     {
-        BroadcastServer("Player connected. Aborting shutdown.");
+        ShutDownService.BroadcastServer(
+            "Player connected. Aborting shutdown.",
+            CustomLogLevel.Info
+        );
         ShutDownService.CancelShutdown();
-    }
-
-    private static void BroadcastServer(string message)
-    {
-        message = $"[EmptyServerShutdown] {message}";
-        ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral(message), Color.Orange);
-        Console.WriteLine(message);
     }
 }
