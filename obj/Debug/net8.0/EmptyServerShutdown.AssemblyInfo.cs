@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EmptyServerShutdown")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+126417dc9d658aff055af53864c217cdc2d35b6c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9784fa2f7d082dd88be8638749bf354dd12286b4")]
 [assembly: System.Reflection.AssemblyProductAttribute("EmptyServerShutdown")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EmptyServerShutdown")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
