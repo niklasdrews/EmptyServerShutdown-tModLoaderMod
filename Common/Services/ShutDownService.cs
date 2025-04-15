@@ -1,10 +1,12 @@
 using System;
 using System.Threading.Tasks;
+using EmptyServerShutdown.Common.Configs;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Chat;
 using Terraria.IO;
 using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace EmptyServerShutdown.Common
 {
@@ -13,11 +15,8 @@ namespace EmptyServerShutdown.Common
         // if shutdown is scheduled
         private static bool shutDownScheduled;
 
-        // how long to wait between checks if player connected
-        private const int CheckPlayerCountIntervall = 1;
-
-        // How long to wait until shuting down
-        private const int SecondsUntilShutdown = 20;
+        private static EmptyServerShutdownConfig Config =>
+            ModContent.GetInstance<EmptyServerShutdownConfig>();
 
         /// <summary>
         /// Schedules a server shutdown if the server is empty.
@@ -46,16 +45,16 @@ namespace EmptyServerShutdown.Common
                     int waitedSeconds = 0;
 
                     // while shutdown is scheduled and countdown is running, wait for player to (re)connect
-                    while (shutDownScheduled && waitedSeconds < SecondsUntilShutdown)
+                    while (shutDownScheduled && waitedSeconds < Config.SecondsUntilShutdown)
                     {
                         // delay next check
-                        await Task.Delay(CheckPlayerCountIntervall * 1000);
-                        waitedSeconds += CheckPlayerCountIntervall;
+                        await Task.Delay(Config.CheckPlayerCountIntervall * 1000);
+                        waitedSeconds += Config.CheckPlayerCountIntervall;
 
                         BroadcastServer($"Waited {waitedSeconds} seconds.");
 
                         // when the shutdown time is reached, save and shut down
-                        if (waitedSeconds >= SecondsUntilShutdown)
+                        if (waitedSeconds >= Config.SecondsUntilShutdown)
                         {
                             SaveAndShutdown();
                         }
