@@ -1,1 +1,15 @@
+Configs: {
+	EmptyServerShutdownConfig: {
+		DisplayName: Empty Server Shutdown Config
 
+		CheckPlayerCountIntervall: {
+			Label: Intervall in seconds to check if player reconnected.
+			Tooltip: Set the interval to check if a player reconnected. A to high value may cause the server to shutdown even if a player connected.
+		}
+
+		SecondsUntilShutdown: {
+			Label: Seconds Until Shutdown
+			Tooltip: Set the time to wait until the server shutdowns.
+		}
+	}
+}
