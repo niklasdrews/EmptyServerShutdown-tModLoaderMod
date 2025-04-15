@@ -1,0 +1,3 @@
+displayName = EmptyServerShutdown
+author = TheCrickson
+version = 0.2
