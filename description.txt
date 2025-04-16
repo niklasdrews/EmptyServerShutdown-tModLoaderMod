@@ -1,1 +1,15 @@
-Modify this file with a description of your mod.
+EmptyServerShutdown is a server plugin designed to automatically shut down the server when no players are connected. It includes a countdown timer that waits for players to reconnect before initiating the shutdown process. Player connection checks are performed at regular intervals during this countdown. If no players reconnect before the timer expires, the server saves the world and shuts down.
+
+Optional Feature: Upon server startup, the countdown timer also begins immediately to prevent the server from running unnecessarily when no players have joined.
+
+Settings/Configurations:
+
+    - CheckPlayerCountInterval: Specifies the interval in seconds between checks for player connections during the scheduled shutdown. Setting this too high may cause premature server shutdowns.
+
+    - SecondsUntilShutdown: Sets the duration in seconds that the server waits before initiating shutdown after detecting no player connections. During this countdown, player connection checks are performed based on the specified interval.
+
+    - LoggingLevel: Controls the verbosity of plugin messages. Options include: 0 = No messages, 1 = Informational messages, 2 = Debug messages.
+
+    - ShutdownAfterStartup: Determines whether the countdown timer should start immediately upon server startup to prevent running an empty server session.
+
+    - LogChannel: Specifies where log messages should be output. Options include: 0 = In-game chat and server console, 1 = Server console only, 2 = In-game chat only.

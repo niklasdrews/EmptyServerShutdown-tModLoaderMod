@@ -15,6 +15,9 @@ public class EmptyServerShutdownConfig : ModConfig
     /// </summary>
     public int CheckPlayerCountIntervall;
 
+    [DefaultValue(true)]
+    public bool ShutdownAfterStartup;
+
     [DefaultValue(300)]
     [Range(1, 18000)]
     /// <summary>
@@ -23,10 +26,13 @@ public class EmptyServerShutdownConfig : ModConfig
     /// </summary>
     public int SecondsUntilShutdown;
 
-    [DefaultValue(CustomLogLevel.None)]
-    public CustomLogLevel LoggingLevel;
+    [DefaultValue(LogLevel.None)]
+    public LogLevel LoggingLevel;
 
-    public enum CustomLogLevel
+    [DefaultValue(LoggingChannel.All)]
+    public LoggingChannel LogChannel;
+
+    public enum LogLevel
     {
         /// <summary>
         /// No logging.
@@ -42,5 +48,23 @@ public class EmptyServerShutdownConfig : ModConfig
         /// Log debug messages and info.
         /// </summary>
         Debug = 2,
+    }
+
+    public enum LoggingChannel
+    {
+        /// <summary>
+        /// Log to the all channels.
+        /// </summary>
+        All = 0,
+
+        /// <summary>
+        /// Log to the console.
+        /// </summary>
+        Console = 1,
+
+        /// <summary>
+        /// Log to the chat.
+        /// </summary>
+        Chat = 2,
     }
 }

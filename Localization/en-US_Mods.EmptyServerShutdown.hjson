@@ -16,12 +16,36 @@ Configs: {
 			Label: Logging level
 			Tooltip: Defines which messages to output in console and ingame chat. 0 = No messages, 1 = informational messages, 2 = debug messages
 		}
+
+		LogChannel: {
+			Label: Logging method
+			Tooltip: How log messages should be output. 0 = ingame chat + console, 1 = console, 2 = ingame chat
+		}
+
+		ShutdownAfterStartup: {
+			Label: Shutdown After Startup
+			Tooltip: ""
+		}
 	}
 
 	CustomLogLevel: {
+		Tooltip: How verbose the log messages are
+		None.Label: no log messages
+		Info.Label: basic informational log messages
+		Debug.Label: Info + even more verbose log messages
+	}
+
+	LogLevel: {
 		Tooltip: ""
 		None.Label: None
 		Info.Label: Info
 		Debug.Label: Debug
+	}
+
+	LoggingChannel: {
+		Tooltip: ""
+		All.Label: All
+		Console.Label: Console
+		Chat.Label: Chat
 	}
 }

@@ -1,8 +1,4 @@
-using System;
-using Microsoft.Extensions.Logging;
-using Microsoft.Xna.Framework;
-using Terraria.Chat;
-using Terraria.Localization;
+using EmptyServerShutdown.Common.Services;
 using Terraria.ModLoader;
 using static EmptyServerShutdown.Common.Configs.EmptyServerShutdownConfig;
 
@@ -21,10 +17,7 @@ public class EmptyServerShutdownPlayerService : ModPlayer
 
     public override void PlayerConnect()
     {
-        ShutDownService.BroadcastServer(
-            "Player connected. Aborting shutdown.",
-            CustomLogLevel.Info
-        );
+        ShutDownService.BroadcastServer("Player connected. Aborting shutdown.", LogLevel.Info);
         ShutDownService.CancelShutdown();
     }
 }

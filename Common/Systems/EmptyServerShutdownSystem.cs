@@ -1,3 +1,4 @@
+using EmptyServerShutdown.Common.Services;
 using Terraria.ModLoader;
 
 namespace EmptyServerShutdown.Common.Systems;
@@ -9,7 +10,7 @@ public class EmptyServerShutdownSystem : ModSystem
     public override void PostUpdateTime()
     {
         // schedule shutdown if no players are online after the server started
-        if (firstTick)
+        if (firstTick && ShutDownService.Config.ShutdownAfterStartup)
         {
             firstTick = false;
             ShutDownService.ScheduleShutdown();
