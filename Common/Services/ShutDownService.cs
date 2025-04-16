@@ -15,10 +15,10 @@ namespace EmptyServerShutdown.Common.Services;
 /// Provides functionality to manage server shutdowns when the server is empty.
 /// </summary>
 /// <remarks>
-/// The <see cref="ShutDownService"/> class is responsible for scheduling and canceling server shutdowns,
+/// The <see cref="EmptyServerShutDownService"/> class is responsible for scheduling and canceling server shutdowns,
 /// monitoring player activity, and ensuring the server is saved and shut down properly when no players are present.
 /// </remarks>
-public class ShutDownService
+public class EmptyServerShutDownService
 {
     /// <summary>
     /// Indicates whether a server shutdown has been scheduled.

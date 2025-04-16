@@ -10,10 +10,10 @@ public class EmptyServerShutdownSystem : ModSystem
     public override void PostUpdateTime()
     {
         // schedule shutdown if no players are online after the server started
-        if (firstTick && ShutDownService.Config.ShutdownAfterStartup)
+        if (firstTick && EmptyServerShutDownService.Config.ShutdownAfterStartup)
         {
             firstTick = false;
-            ShutDownService.ScheduleShutdown();
+            EmptyServerShutDownService.ScheduleShutdown();
         }
     }
 }
