@@ -1,1 +1,20 @@
-This description will show up on the steam page, check out https://steamcommunity.com/comment/Guide/formattinghelp.
+#EmptyServerShutdown Plugin
+
+**EmptyServerShutdown** is a server plugin designed to **automatically shut down the server when no players are connected**. It uses a countdown timer to allow players a chance to reconnect before the shutdown occurs. During this countdown, the server checks for player connections at regular intervals.
+
+If no players connect before the timer expires, the **world is saved** and the **server shuts down** safely.
+
+> **Optional Feature:**  
+> On server startup, the shutdown timer can begin immediately. This prevents the server from running idle if it was started but no players joined.
+
+---
+
+## ⚙️ Settings & Configuration
+
+| Setting | Description |
+|--------|-------------|
+| **`CheckPlayerCountInterval`** | *(in seconds)* — How often the server checks for player connections during the shutdown countdown. ⚠️ A value too high may cause the server to shut down even if a player connects. |
+| **`SecondsUntilShutdown`** | *(in seconds)* — Total time the server waits before shutting down after detecting no players. During this period, `CheckPlayerCountInterval` is used to monitor connections. |
+| **`LoggingLevel`** | Controls the verbosity of plugin messages:<br>• `0` = No messages<br>• `1` = Informational messages<br>• `2` = Debug messages |
+| **`ShutdownAfterStartup`** | If `true`, the shutdown timer starts on the **first server tick**, preventing the server from running indefinitely if no one joins. |
+| **`LogChannel`** | Determines where plugin messages are displayed:<br>• `0` = In-game chat **and** console<br>• `1` = Console only<br>• `2` = In-game chat only |
