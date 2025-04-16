@@ -26,10 +26,10 @@ public class EmptyServerShutdownConfig : ModConfig
     /// </summary>
     public int SecondsUntilShutdown;
 
-    [DefaultValue(LogLevel.None)]
+    [DefaultValue(LogLevel.Info)]
     public LogLevel LoggingLevel;
 
-    [DefaultValue(LoggingChannel.All)]
+    [DefaultValue(LoggingChannel.Console)]
     public LoggingChannel LogChannel;
 
     public enum LogLevel
