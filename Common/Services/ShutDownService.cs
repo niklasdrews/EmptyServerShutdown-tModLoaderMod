@@ -42,7 +42,10 @@ public class EmptyServerShutDownService
         if (Main.dedServ)
         {
             shutDownScheduled = true;
-            BroadcastServer("Server is empty. Scheduling shut down.", LogLevel.Info);
+            BroadcastServer(
+                $"Server is empty. Scheduling shut down in {Config.SecondsUntilShutdown} seconds.",
+                LogLevel.Info
+            );
 
             // Start shutdown timer on a background task
             Task.Run(async () =>
@@ -64,8 +67,9 @@ public class EmptyServerShutDownService
                         SaveAndShutdown();
                     }
                     // if a player connected, cancel shutdown
-                    else if (!shutDownScheduled)
+                    else if (!shutDownScheduled || ActivePlayerCount() > 0)
                     {
+                        CancelShutdown();
                         return;
                     }
                 }
@@ -73,6 +77,7 @@ public class EmptyServerShutDownService
         }
     }
 
+    // only called on client so currently not used :(
     public static void CancelShutdown()
     {
         BroadcastServer($"Player (re)connected. Canceling shutdown.", LogLevel.Info);
@@ -113,15 +118,13 @@ public class EmptyServerShutDownService
     private static void SaveAndShutdown()
     {
         BroadcastServer("Saving world...", LogLevel.Info);
-        WorldFile.SaveWorld(true);
+        WorldFile.SaveWorld(false);
         BroadcastServer("World saved. Shutting down.", LogLevel.Info);
-
-        Main.autoShutdown = true;
 
         // Fallback force shutdown after short delay
         Task.Run(async () =>
         {
-            await Task.Delay(3000); // Give it a moment to process shutdown
+            await Task.Delay(5000); // Give it a moment to process shutdown
             BroadcastServer("Server did not shut down. Forcing exit.", LogLevel.Debug);
             Environment.Exit(0); // Force exit if nothing happens
         });
